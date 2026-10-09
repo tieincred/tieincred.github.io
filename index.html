@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tausif Iqbal</title>
+<meta name="description" content="Tausif Iqbal trains speech and language models for real-world audio: telephony ASR for Indian languages, multilingual TTS, speech enhancement and LLM post-training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<style>
+/* Single left-aligned reading column. Each model carries its own result bars, drawn to one scale per chart. */
+:root{
+  --paper:#F3F5F2; --ink:#1A1F1C; --muted:#5E6862; --rule:#D5DBD6;
+  --ours:#2448C8; --base:#B4BCB6; --chip:#E4E9E5;
+  --head:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#121614; --ink:#E6EAE7; --muted:#97A39C; --rule:#2B332E;
+  --ours:#8FA6FF; --base:#4A544E; --chip:#1E2521; color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+.page{max-width:44rem;margin:0 auto;padding-inline:20px;padding-block:72px 96px}
+a{color:inherit;text-decoration-color:var(--rule);text-underline-offset:3px;text-decoration-thickness:1.5px}
+a:hover{text-decoration-color:var(--ours)}
+a:focus-visible{outline:2px solid var(--ours);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--head);font-weight:600;line-height:1.15;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,6vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+.lede{font-size:1.25rem;line-height:1.5;margin:20px 0 0;max-width:36rem}
+.links{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:22px;font-family:var(--head);font-size:1rem}
+section{margin-top:76px}
+h2{font-size:1.5rem;padding-bottom:12px;border-bottom:1.5px solid var(--ink)}
+.item{padding-block:28px;border-bottom:1px solid var(--rule)}
+.item:last-child{border-bottom:0}
+.item-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px}
+h3{font-size:1.2rem}
+.where{font-family:var(--head);font-size:.95rem;color:var(--muted)}
+.item p{margin:10px 0 0;max-width:38rem}
+.status{display:inline-block;font-family:var(--head);font-size:.85rem;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--chip);color:var(--ink);margin-top:12px}
+/* result charts */
+.chart{margin-top:20px;display:grid;gap:12px}
+.chart-title{font-family:var(--head);font-size:.95rem;color:var(--muted)}
+.row{display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr);gap:4px 14px;align-items:center}
+.row .lab{font-family:var(--head);font-size:.92rem;line-height:1.3}
+.bars{display:grid;gap:4px}
+.bar{display:flex;align-items:center;gap:8px;font-family:var(--head);font-size:.88rem;font-variant-numeric:tabular-nums}
+.bar i{display:block;height:12px;border-radius:2px;background:var(--base);flex:none}
+.bar.ours i{background:var(--ours)}
+.bar.ours{font-weight:600}
+.key{display:flex;flex-wrap:wrap;gap:4px 18px;font-family:var(--head);font-size:.85rem;color:var(--muted)}
+.key span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--base)}
+.key span.o::before{background:var(--ours)}
+.note{font-size:.9rem;color:var(--muted);margin-top:4px}
+@media (max-width:520px){.row{grid-template-columns:1fr}.page{padding-block:48px 72px}}
+.facts{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:14px;font-family:var(--head);font-size:.95rem}
+.facts b{font-weight:700;font-variant-numeric:tabular-nums}
+footer{margin-top:80px;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--head);font-size:.95rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+@media (prefers-reduced-motion:no-preference){
+  .bar i{transform-origin:left;animation:grow .7s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+<header>
+  <h1>Tausif Iqbal</h1>
+  <p class="lede">I train speech and language models that have to work on real audio: noisy phone lines, eleven Indian languages, and conversations that switch between them mid-sentence.</p>
+  <p class="lede" style="font-size:1.05rem;color:var(--muted);margin-top:14px">Founding member and research lead at Voicing AI, where these models serve about four million calls a month. AI Research Fellow at the Fatima Research Institute for AI. Based in Bengaluru.</p>
+  <nav class="links" aria-label="Profiles">
+    <a href="https://huggingface.co/TieIncred">Hugging Face</a>
+    <a href="https://github.com/tieincred">GitHub</a>
+    <a href="https://linkedin.com/in/tausif-iqbal-77819a182/">LinkedIn</a>
+    <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+  </nav>
+</header>
+
+<section aria-labelledby="research">
+  <h2 id="research">Research</h2>
+
+  <article class="item">
+    <div class="item-top">
+      <h3>Teacher-Student-Judge: synthetic preference data for training tool-using agents</h3>
+    </div>
+    <span class="status">Manuscript under review</span>
+    <p>A pipeline where a teacher model, a user simulator and a judge produce preference pairs for multi-turn tool use. Kimi-k2 acts as teacher and Qwen3-Coder-480B as simulator. About 8,000 DPO pairs were used to post-train Qwen3-30B-A3B, a Mixture-of-Experts model, on 8×H100 with FSDP and DeepSpeed ZeRO-3.</p>
+    <div class="chart" role="img" aria-label="Benchmark scores before and after DPO: TauBench Airline 32 to 44 percent, TauBench Retail 54 to 61 percent, ACE-Bench 61.5 to 66.1, BFCL 34.11 to 37.16.">
+      <div class="key"><span>Base model</span><span class="o">After DPO</span></div>
+      <div class="row"><span class="lab">TauBench Airline</span><div class="bars">
+        <div class="bar"><i style="width:calc(32 * 0.6%)"></i>32%</div>
+        <div class="bar ours"><i style="width:calc(44 * 0.6%)"></i>44%</div></div></div>
+      <div class="row"><span class="lab">TauBench Retail</span><div class="bars">
+        <div class="bar"><i style="width:calc(54 * 0.6%)"></i>54%</div>
+        <div class="bar ours"><i style="width:calc(61 * 0.6%)"></i>61%</div></div></div>
+      <div class="row"><span class="lab">ACE-Bench</span><div class="bars">
+        <div class="bar"><i style="width:calc(61.5 * 0.6%)"></i>0.615</div>
+        <div class="bar ours"><i style="width:calc(66.1 * 0.6%)"></i>0.661</div></div></div>
+      <div class="row"><span class="lab">BFCL</span><div class="bars">
+        <div class="bar"><i style="width:calc(34.11 * 0.6%)"></i>34.11</div>
+        <div class="bar ours"><i style="width:calc(37.16 * 0.6%)"></i>37.16</div></div></div>
+      <p class="note">All four benchmarks drawn on a 0–100 scale.</p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="item-top">
+      <h3>Training-free optimization of Mixture-of-Experts models</h3>
+      <span class="where">Fatima Research Institute for AI</span>
+    </div>
+    <span class="status">Ongoing</span>
+    <p>Can an MoE model drop experts without retraining and keep its reasoning? I study expert pruning, router confidence, activation patterns and layer-level redundancy in OLMoE and DeepSeekMoE, with the goal of cutting inference cost while holding downstream task performance.</p>
+  </article>
+</section>
+
+<section aria-labelledby="models">
+  <h2 id="models">Models</h2>
+
+  <article class="item">
+    <div class="item-top">
+      <h3><a href="https://huggingface.co/TieIncred/VaaniCall">VaaniCall</a></h3>
+      <span class="where">Speech recognition, 11 Indian languages</span>
+    </div>
+    <p>A 430M-parameter FastConformer-RNNT model adapted for telephone audio. Trained in two stages on about 4.4 million utterances (40,000+ hours), with a 21-stage augmentation pipeline that simulates 8 kHz codecs, packet loss, VAD clipping, handsets and real-world noise.</p>
+    <div class="chart" role="img" aria-label="Word error rate on telephonic IndicVoices: VaaniCall 24.06 percent, Whisper large-v3 84.50 percent. Lower is better.">
+      <span class="chart-title">Word error rate on telephonic IndicVoices, lower is better</span>
+      <div class="row"><span class="lab">VaaniCall</span><div class="bars">
+        <div class="bar ours"><i style="width:calc(24.06 * 0.6%)"></i>24.06%</div></div></div>
+      <div class="row"><span class="lab">Whisper large-v3</span><div class="bars">
+        <div class="bar"><i style="width:calc(84.5 * 0.6%)"></i>84.50%</div></div></div>
+      <p class="note">Same evaluation setup for both models.</p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="item-top">
+      <h3>SEMamba speech enhancement</h3>
+      <span class="where">Noise suppression for call audio</span>
+    </div>
+    <p>After comparing Mamba, Transformer and Conformer designs, I trained SEMamba from scratch (1.88M parameters, magnitude and phase enhancement) on about 5,000 hours of real call audio. I judged it by what it does for recognition: Whisper makes fewer errors on the cleaned audio. It beat MetricGAN+ and matched or exceeded MP-SENet under the same test. Runs in production; not released.</p>
+    <div class="chart" role="img" aria-label="Whisper word error rate on noisy audio. Whisper-Base: 9.0 percent raw, 7.9 percent after enhancement. Whisper-Large-v3: 3.1 percent raw, 2.7 percent after enhancement.">
+      <span class="chart-title">Whisper word error rate on noisy calls, lower is better</span>
+      <div class="key"><span>Raw audio</span><span class="o">After enhancement</span></div>
+      <div class="row"><span class="lab">Whisper-Base</span><div class="bars">
+        <div class="bar"><i style="width:calc(9.0 * 6%)"></i>9.0%</div>
+        <div class="bar ours"><i style="width:calc(7.9 * 6%)"></i>7.9%</div></div></div>
+      <div class="row"><span class="lab">Whisper-Large-v3</span><div class="bars">
+        <div class="bar"><i style="width:calc(3.1 * 6%)"></i>3.1%</div>
+        <div class="bar ours"><i style="width:calc(2.7 * 6%)"></i>2.7%</div></div></div>
+      <p class="note">Drawn on a 0–10% scale.</p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="item-top">
+      <h3><a href="https://github.com/tieincred/VoxCPM2-Indic">VoxCPM2 Indic</a></h3>
+      <span class="where">Text-to-speech, 12 languages</span>
+    </div>
+    <p>A full fine-tune of VoxCPM2 for Hindi, Bengali, Marathi, Tamil, Telugu, Kannada, Malayalam, Gujarati, Punjabi, Odia, Urdu and code-switched English. The release includes the data preparation and balancing scripts, training code, and tests for hallucination, runaway generation and truncation.</p>
+    <div class="facts"><span><b>12</b> languages</span><span>Checkpoint and training workflow public</span></div>
+  </article>
+
+  <article class="item">
+    <div class="item-top">
+      <h3><a href="https://huggingface.co/voicing-ai/ParlerVoice">ParlerVoice</a></h3>
+      <span class="where">Expressive text-to-speech</span>
+    </div>
+    <p>An expressive multi-speaker TTS model trained on curated speech covering several accent groups, evaluated for speaker similarity and naturalness, and optimized for production inference.</p>
+    <div class="facts"><span><b>0.9B</b> parameters</span><span><b>650+</b> hours</span><span><b>85</b> speakers</span></div>
+  </article>
+</section>
+
+<section aria-labelledby="production">
+  <h2 id="production">In production</h2>
+  <div class="item">
+    <p style="margin-top:0">These models run inside the voice platform I built at Voicing AI as its first engineer. Cutting end-to-end response time from roughly 1.7–2.3 seconds to 650–850 ms took work on turn detection, streaming recognition and synthesis, and GPU serving with TensorRT, ONNX Runtime and vLLM. The platform runs in the cloud and on-premise for enterprise customers including Philips, Voya and Computershare.</p>
+    <div class="facts"><span><b>~4M</b> calls a month</span><span><b>650–850 ms</b> response time</span></div>
+  </div>
+</section>
+
+<footer>
+  <span>Tausif Iqbal, Bengaluru</span>
+  <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+</footer>
+
+</main>
+</body>
+</html>
