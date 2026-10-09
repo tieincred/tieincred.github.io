@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher-Student-Judge | Tausif Iqbal</title>
+<meta name="description" content="Synthetic preference data for training tool-using LLM agents, and DPO post-training of Qwen3-30B-A3B.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page detail">
+<a class="back" href="index.html">Tausif Iqbal</a>
+<article class="detail">
+<h1>Teacher-Student-Judge</h1>
+<p class="lede">Synthetic preference data for training tool-using agents.</p>
+<span class="status">Manuscript under review</span>
+
+<section><h2>The problem</h2>
+<p>Agents that call tools over many turns fail in ways single-turn data does not capture: they lose track of the user's goal, call the wrong tool, or stop early. Preference training can fix this, but collecting human preferences over long, multi-turn tool-use conversations is slow and expensive.</p></section>
+
+<section><h2>Method</h2>
+<p>Three kinds of model work together to produce preference data without human labeling:</p>
+<ul>
+<li><b>Teacher</b> (Kimi-k2) shows strong behavior on the task.</li>
+<li><b>Simulator</b> (Qwen3-Coder-480B) plays the user across multi-turn conversations.</li>
+<li><b>Judge</b> compares candidate trajectories and decides which is preferred.</li>
+</ul>
+<p>The pipeline produced about 8,000 preference pairs, used to train the student with Direct Preference Optimization.</p></section>
+
+<section><h2>Training</h2>
+<div class="tablewrap"><table>
+<tr><th>Student model</th><td><a href="https://huggingface.co/Qwen/Qwen3-30B-A3B">Qwen3-30B-A3B</a> (Mixture-of-Experts, 30B total, 3B active)</td></tr>
+<tr><th>Objective</th><td>DPO on ~8K synthetic pairs</td></tr>
+<tr><th>Hardware</th><td>8×H100</td></tr>
+<tr><th>Sharding</th><td>PyTorch FSDP, then DeepSpeed ZeRO-3 via Hugging Face Accelerate</td></tr>
+<tr><th>Memory</th><td>FP16 mixed precision, gradient accumulation, gradient checkpointing</td></tr>
+</table></div></section>
+
+<section><h2>Results</h2>
+<div class="tablewrap"><table>
+<tr><th>Benchmark</th><th class="num">Base</th><th class="num">After DPO</th><th class="num">Change</th></tr>
+<tr><td><a href="https://github.com/sierra-research/tau-bench">τ-bench</a> Airline</td><td class="num">32%</td><td class="num win">44%</td><td class="num">+12 pts</td></tr>
+<tr><td><a href="https://github.com/sierra-research/tau-bench">τ-bench</a> Retail</td><td class="num">54%</td><td class="num win">61%</td><td class="num">+7 pts</td></tr>
+<tr><td>ACE-Bench</td><td class="num">0.615</td><td class="num win">0.661</td><td class="num">+0.046</td></tr>
+<tr><td><a href="https://gorilla.cs.berkeley.edu/leaderboard.html">BFCL</a></td><td class="num">34.11</td><td class="num win">37.16</td><td class="num">+3.05</td></tr>
+</table></div>
+<div class="chart" role="img" aria-label="Benchmark scores before and after DPO: TauBench Airline 32 to 44 percent, Retail 54 to 61 percent, ACE-Bench 0.615 to 0.661, BFCL 34.11 to 37.16.">
+<div class="key"><span>Base model</span><span class="o">After DPO</span></div>
+<div class="row"><span class="lab">TauBench Airline</span><div class="bars">
+<div class="bar"><i style="width:19.20%"></i>32%</div>
+<div class="bar ours"><i style="width:26.40%"></i>44%</div>
+</div></div>
+<div class="row"><span class="lab">TauBench Retail</span><div class="bars">
+<div class="bar"><i style="width:32.40%"></i>54%</div>
+<div class="bar ours"><i style="width:36.60%"></i>61%</div>
+</div></div>
+<div class="row"><span class="lab">ACE-Bench</span><div class="bars">
+<div class="bar"><i style="width:36.90%"></i>0.615</div>
+<div class="bar ours"><i style="width:39.66%"></i>0.661</div>
+</div></div>
+<div class="row"><span class="lab">BFCL</span><div class="bars">
+<div class="bar"><i style="width:20.47%"></i>34.11</div>
+<div class="bar ours"><i style="width:22.30%"></i>37.16</div>
+</div></div>
+<p class="note">All four benchmarks drawn on a 0–100 scale.</p>
+</div>
+</section>
+
+<section><h2>Paper</h2>
+<p>The manuscript is under review. A preprint link will be added here when it is public.</p></section>
+</article>
+<footer>
+  <a href="index.html">Tausif Iqbal</a>
+  <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+</footer>
+</main>
+</body>
+</html>

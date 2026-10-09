@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoE optimization | Tausif Iqbal</title>
+<meta name="description" content="Training-free optimization of Mixture-of-Experts language models: expert pruning, router confidence and layer redundancy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page detail">
+<a class="back" href="index.html">Tausif Iqbal</a>
+<article class="detail">
+<h1>Training-free optimization of Mixture-of-Experts models</h1>
+<p class="lede">Can an MoE model drop experts without retraining and keep its reasoning?</p>
+<span class="status">Ongoing, Fatima Research Institute for AI</span>
+
+<section><h2>Why it matters</h2>
+<p>Mixture-of-Experts models activate only a few experts per token, but every expert still has to sit in GPU memory. If some experts, or whole layers, contribute little, removing them without retraining would cut serving cost for anyone running these models.</p></section>
+
+<section><h2>What I study</h2>
+<ul>
+<li><b>Expert pruning:</b> which experts can be removed, and how performance degrades as more go.</li>
+<li><b>Router confidence:</b> whether the router's own scores predict which experts matter.</li>
+<li><b>Activation patterns:</b> how often and on what inputs each expert fires.</li>
+<li><b>Layer-level redundancy:</b> whether some layers' expert sets are interchangeable.</li>
+</ul>
+<p>The goal is lower inference cost with reasoning and downstream task performance held steady.</p></section>
+
+<section><h2>Models</h2>
+<ul>
+<li><a href="https://huggingface.co/allenai/OLMoE-1B-7B-0924">OLMoE</a> (Allen Institute for AI)</li>
+<li><a href="https://github.com/deepseek-ai/DeepSeek-MoE">DeepSeekMoE</a> (DeepSeek)</li>
+</ul></section>
+
+<section><h2>Results</h2>
+<p>Work in progress. Results will be posted here.</p></section>
+</article>
+<footer>
+  <a href="index.html">Tausif Iqbal</a>
+  <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+</footer>
+</main>
+</body>
+</html>

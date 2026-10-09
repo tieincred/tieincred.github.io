@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEMamba enhancement | Tausif Iqbal</title>
+<meta name="description" content="Speech enhancement for call audio: SEMamba trained from scratch on about 5,000 hours, evaluated through downstream ASR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page detail">
+<a class="back" href="index.html">Tausif Iqbal</a>
+<article class="detail">
+<h1>SEMamba speech enhancement</h1>
+<p class="lede">Noise suppression for real call audio, judged by what it does for speech recognition.</p>
+<span class="status">In production, not released</span>
+
+<section><h2>Choosing the architecture</h2>
+<p>I compared Mamba-, Transformer- and Conformer-based designs for a model that had to run inside a real-time voice pipeline, and chose <a href="https://arxiv.org/abs/2405.06573">SEMamba</a>: a Mamba model that enhances both magnitude and phase in the time-frequency domain.</p></section>
+
+<section><h2>Training</h2>
+<div class="tablewrap"><table>
+<tr><th>Parameters</th><td>~1.88M</td></tr>
+<tr><th>Initialization</th><td>Trained from scratch</td></tr>
+<tr><th>Data</th><td>~5,000 hours of real-world call audio</td></tr>
+</table></div></section>
+
+<section><h2>Results</h2>
+<p>Instead of perceptual scores alone, I measured how much the enhanced audio helps Whisper transcribe noisy calls.</p>
+<div class="chart" role="img" aria-label="Whisper word error rate on noisy audio. Whisper-Base 9.0 percent raw, 7.9 after enhancement. Whisper-Large-v3 3.1 raw, 2.7 after enhancement.">
+<span class="chart-title">Whisper word error rate on noisy calls, lower is better</span>
+<div class="key"><span>Raw audio</span><span class="o">After enhancement</span></div>
+<div class="row"><span class="lab">Whisper-Base</span><div class="bars">
+<div class="bar"><i style="width:54.00%"></i>9.0%</div>
+<div class="bar ours"><i style="width:47.40%"></i>7.9%</div>
+</div></div>
+<div class="row"><span class="lab">Whisper-Large-v3</span><div class="bars">
+<div class="bar"><i style="width:18.60%"></i>3.1%</div>
+<div class="bar ours"><i style="width:16.20%"></i>2.7%</div>
+</div></div>
+<p class="note">Drawn on a 0–10% scale.</p>
+</div>
+<div class="tablewrap"><table>
+<tr><th>Recognizer</th><th class="num">Raw audio</th><th class="num">Enhanced</th></tr>
+<tr><td>Whisper-Base</td><td class="num">9.0%</td><td class="num win">7.9%</td></tr>
+<tr><td>Whisper-Large-v3</td><td class="num">3.1%</td><td class="num win">2.7%</td></tr>
+</table></div>
+<p>Under the same evaluation, it outperformed MetricGAN+ and matched or exceeded MP-SENet.</p></section>
+</article>
+<footer>
+  <a href="index.html">Tausif Iqbal</a>
+  <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+</footer>
+</main>
+</body>
+</html>

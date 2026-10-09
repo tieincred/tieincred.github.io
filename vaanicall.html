@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VaaniCall | Tausif Iqbal</title>
+<meta name="description" content="VaaniCall: telephony speech recognition for 10 Indian languages and English, with per-language results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page detail">
+<a class="back" href="index.html">Tausif Iqbal</a>
+<article class="detail">
+<h1>VaaniCall</h1>
+<p class="lede">Speech recognition for phone calls in 10 Indian languages and English.</p>
+<div class="more"><a href="https://huggingface.co/TieIncred/VaaniCall">Model card on Hugging Face</a></div>
+
+<section><h2>Why phone audio</h2>
+<p>Most Indic speech models are trained on clean, wideband recordings. Contact-center audio is 8 kHz, compressed by codecs, clipped by voice-activity detection and full of line noise. General models that look strong on benchmarks fall apart on it, so VaaniCall is trained to expect it.</p></section>
+
+<section><h2>Training</h2>
+<ul>
+<li><b>Base:</b> NVIDIA NeMo FastConformer-RNNT, fine-tuned from the VAANI checkpoint.</li>
+<li><b>Phase 1, language alignment:</b> encoder frozen; the decoder learns script and language mapping.</li>
+<li><b>Phase 2, acoustic refinement:</b> last five encoder layers and the full decoder unfrozen.</li>
+<li><b>Data:</b> <a href="https://huggingface.co/datasets/ai4bharat/IndicVoices">IndicVoices</a> and <a href="https://arxiv.org/abs/2603.28714">VAANI</a>, 50,000 training clips per language.</li>
+<li><b>Telephony simulator:</b> 21 augmentation stages, including codecs, packet loss, handset EQ, VAD clipping, room impulse responses and real-world noise.</li>
+</ul></section>
+
+<section><h2>Results</h2>
+<div class="chart" role="img" aria-label="Word error rate on telephonic IndicVoices: VaaniCall 24.06 percent, Whisper large-v3 84.50 percent.">
+<span class="chart-title">Word error rate on telephonic IndicVoices, lower is better</span>
+<div class="row"><span class="lab">VaaniCall</span><div class="bars">
+<div class="bar ours"><i style="width:14.44%"></i>24.06%</div>
+</div></div>
+<div class="row"><span class="lab">Whisper large-v3</span><div class="bars">
+<div class="bar"><i style="width:50.70%"></i>84.50%</div>
+</div></div>
+<p class="note">5,500 test clips, 500 per language, same evaluation for both models.</p>
+</div>
+<div class="tablewrap"><table>
+<tr><th>Language</th><th class="num">VaaniCall</th><th class="num">Whisper large-v3</th></tr>
+<tr><td>Bengali</td><td class="num win">15.41%</td><td class="num">73.87%</td></tr>
+<tr><td>English</td><td class="num">13.26%</td><td class="num win">7.80%</td></tr>
+<tr><td>Gujarati</td><td class="num win">21.46%</td><td class="num">61.48%</td></tr>
+<tr><td>Hindi</td><td class="num win">16.04%</td><td class="num">30.31%</td></tr>
+<tr><td>Kannada</td><td class="num win">38.01%</td><td class="num">98.03%</td></tr>
+<tr><td>Malayalam</td><td class="num win">40.70%</td><td class="num">138.83%</td></tr>
+<tr><td>Marathi</td><td class="num win">17.10%</td><td class="num">93.50%</td></tr>
+<tr><td>Odia</td><td class="num win">31.52%</td><td class="num">110.63%</td></tr>
+<tr><td>Punjabi</td><td class="num win">14.46%</td><td class="num">86.10%</td></tr>
+<tr><td>Tamil</td><td class="num win">33.82%</td><td class="num">80.72%</td></tr>
+<tr><td>Telugu</td><td class="num win">28.45%</td><td class="num">146.64%</td></tr>
+<tr class="total"><td>Overall (5,500 clips)</td><td class="num">24.06%</td><td class="num">84.50%</td></tr>
+</table></div>
+<p class="note">Word error rate on telephonic IndicVoices, 500 clips per language. Lower is better.</p>
+<div class="chart" role="img" aria-label="Per-language word error rates for VaaniCall and Whisper large-v3 on telephonic IndicVoices.">
+<span class="chart-title">Telephonic IndicVoices WER by language, lower is better</span>
+<div class="key"><span>Whisper large-v3</span><span class="o">VaaniCall</span></div>
+<div class="row"><span class="lab">Bengali</span><div class="bars">
+<div class="bar ours"><i style="width:6.16%"></i>15.41%</div>
+<div class="bar"><i style="width:29.55%"></i>73.87%</div>
+</div></div>
+<div class="row"><span class="lab">English</span><div class="bars">
+<div class="bar ours"><i style="width:5.30%"></i>13.26%</div>
+<div class="bar"><i style="width:3.12%"></i>7.80%</div>
+</div></div>
+<div class="row"><span class="lab">Gujarati</span><div class="bars">
+<div class="bar ours"><i style="width:8.58%"></i>21.46%</div>
+<div class="bar"><i style="width:24.59%"></i>61.48%</div>
+</div></div>
+<div class="row"><span class="lab">Hindi</span><div class="bars">
+<div class="bar ours"><i style="width:6.42%"></i>16.04%</div>
+<div class="bar"><i style="width:12.12%"></i>30.31%</div>
+</div></div>
+<div class="row"><span class="lab">Kannada</span><div class="bars">
+<div class="bar ours"><i style="width:15.20%"></i>38.01%</div>
+<div class="bar"><i style="width:39.21%"></i>98.03%</div>
+</div></div>
+<div class="row"><span class="lab">Malayalam</span><div class="bars">
+<div class="bar ours"><i style="width:16.28%"></i>40.70%</div>
+<div class="bar"><i style="width:55.53%"></i>138.83%</div>
+</div></div>
+<div class="row"><span class="lab">Marathi</span><div class="bars">
+<div class="bar ours"><i style="width:6.84%"></i>17.10%</div>
+<div class="bar"><i style="width:37.40%"></i>93.50%</div>
+</div></div>
+<div class="row"><span class="lab">Odia</span><div class="bars">
+<div class="bar ours"><i style="width:12.61%"></i>31.52%</div>
+<div class="bar"><i style="width:44.25%"></i>110.63%</div>
+</div></div>
+<div class="row"><span class="lab">Punjabi</span><div class="bars">
+<div class="bar ours"><i style="width:5.78%"></i>14.46%</div>
+<div class="bar"><i style="width:34.44%"></i>86.10%</div>
+</div></div>
+<div class="row"><span class="lab">Tamil</span><div class="bars">
+<div class="bar ours"><i style="width:13.53%"></i>33.82%</div>
+<div class="bar"><i style="width:32.29%"></i>80.72%</div>
+</div></div>
+<div class="row"><span class="lab">Telugu</span><div class="bars">
+<div class="bar ours"><i style="width:11.38%"></i>28.45%</div>
+<div class="bar"><i style="width:58.66%"></i>146.64%</div>
+</div></div>
+<p class="note">Drawn on a 0–150% scale. WER can exceed 100% when a model inserts many wrong words.</p>
+</div>
+<div class="tablewrap"><table>
+<tr><th>Test set</th><th class="num">VaaniCall</th><th class="num">Whisper large-v3</th></tr>
+<tr><td>IndicVoices, telephonic</td><td class="num win">24.06%</td><td class="num">84.50%</td></tr>
+<tr><td>IndicVoices, clean</td><td class="num win">24.20%</td><td class="num">84.07%</td></tr>
+<tr><td>FLEURS, clean (out of domain)</td><td class="num win">23.52%</td><td class="num">65.23%</td></tr>
+</table></div></section>
+
+<section><h2>Limitations</h2>
+<ul>
+<li>Whisper large-v3 is still better on English.</li>
+<li>Malayalam, Kannada and Tamil remain the hardest languages.</li>
+<li>Comparisons against the VAANI base and AI4Bharat IndicConformer are on the <a href="https://huggingface.co/TieIncred/VaaniCall">model card</a>.</li>
+</ul></section>
+</article>
+<footer>
+  <a href="index.html">Tausif Iqbal</a>
+  <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+</footer>
+</main>
+</body>
+</html>

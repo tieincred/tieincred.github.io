@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoxCPM2 Indic | Tausif Iqbal</title>
+<meta name="description" content="A full fine-tune of VoxCPM2 for 12 Indic languages and English, with public code and checkpoint.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page detail">
+<a class="back" href="index.html">Tausif Iqbal</a>
+<article class="detail">
+<h1>VoxCPM2 Indic</h1>
+<p class="lede">Text-to-speech for 12 Indic languages and English.</p>
+<div class="more"><a href="https://github.com/tieincred/VoxCPM2-Indic">Code on GitHub</a><a href="https://huggingface.co/TieIncred/VoxCPM2-Indic">Checkpoint on Hugging Face</a></div>
+
+<section><h2>What it does</h2>
+<ul>
+<li>Reads native script directly, with no language tag.</li>
+<li>Covers Hindi, Bengali, Marathi, Tamil, Telugu, Kannada, Malayalam, Gujarati, Punjabi, Odia, Urdu and code-switched English.</li>
+<li>Clones a voice from a short reference clip and its transcript.</li>
+<li>Outputs 48 kHz audio.</li>
+</ul></section>
+
+<section><h2>How it was built</h2>
+<p>A full fine-tune of <a href="https://github.com/OpenBMB/VoxCPM">OpenBMB's VoxCPM2</a>, not a LoRA adapter. The release includes the multilingual data preparation, validation and balancing tools, LoRA and full fine-tuning configs, and training and test scripts.</p></section>
+
+<section><h2>Testing</h2>
+<p>Autoregressive TTS has characteristic failure modes, so the test suite checks for them directly: hallucinated speech, runaway generation that never stops, and truncated endings.</p></section>
+</article>
+<footer>
+  <a href="index.html">Tausif Iqbal</a>
+  <a href="mailto:tausifiqbal10@gmail.com">tausifiqbal10@gmail.com</a>
+</footer>
+</main>
+</body>
+</html>
